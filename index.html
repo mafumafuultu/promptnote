@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Prompt note</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="./node_modules/js-yaml/dist/js-yaml.min.js"></script>
+	<script src="./main.js"></script>
+	<script>
+function checkdBox() {
+	let checked = [...document.forms['accs'].querySelectorAll(':checked')];
+	DOC.ID('tx').value = checked.map(v => v.dataset.en).join(', ');
+};
+
+onload().then(async () => {
+	var forms = DOC.ID('accs');
+	await loadItems().then(data => forms.append(...toAcc(data)));
+	forms.onchange = function(e) {
+		switch(e.target.tagName) {
+			case 'INPUT':
+			case 'LABEL':
+				checkdBox();
+				break;
+			default:
+		}
+	};
+	DOC.ID('check').onclick = () => checkdBox();
+	DOC.ID('clear').onclick = function() {
+		let checked = [...document.forms['accs'].querySelectorAll(':checked')];
+		checked.forEach(v => v.checked = false);
+		DOC.ID('tx').value = '';
+	}
+});
+
+	</script>
+</head>
+<body>
+	<button id="clear">clear</button>
+	<button id="check">check</button>
+	
+	<div id="outer">
+		<form id="accs">
+			
+		</form>
+	</div>
+	<textarea name="" id="tx"></textarea>
+</body>
+</html>
