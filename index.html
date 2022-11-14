@@ -10,8 +10,8 @@
 	<script>
 function checkdBox() {
 	let checked = [...document.forms['accs'].querySelectorAll(':checked')];
-	DOC.ID('positive').value = checked.map(v => v.dataset.positive).join(', ');
-	DOC.ID('negative').value = checked.map(v => v.dataset.negative).join(', ');
+	DOC.ID('positive').value = checked.map(v => v.dataset.positive).filter(REMOVE_NOVAL).join(', ');
+	DOC.ID('negative').value = checked.map(v => v.dataset.negative).filter(REMOVE_NOVAL).join(', ');
 };
 
 onload().then(async () => {
@@ -40,8 +40,7 @@ onload().then(async () => {
 </head>
 <body>
 	<button id="clear">clear</button>
-	<div></div>
-	
+	<div><a href="https://github.com/mafumafuultu/promptnote">github</a></div>
 	<div id="outer">
 		<form id="accs">
 			

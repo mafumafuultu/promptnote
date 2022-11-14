@@ -7,6 +7,7 @@ const myItems = ymldir([
 	'preset.yml',
 	'base.yml',
 ]);
+const REMOVE_NOVAL = v => v == null;
 const mix = a => Object.assign(...a);
 const DOC = {
 	ID: id => document.getElementById(id),
