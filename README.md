@@ -25,14 +25,19 @@ const myItems = ymldir([
 ```yaml
 category:
   group A:
-    prompt: description
-    "{{{If there is a curly bracket at the beginning}}}": Enclose in double quotas
-    dog: 犬
+    description: prompt 
+    Enclose in double quotas: "{{{If there is a curly bracket at the beginning}}}"
+    犬: dog
 
   group B:
-    promp1, promp2: Comma-separated prompts
+    Comma-separated prompts: promp1, promp2
 
     sub group:
-      prompt: description
+      description: prompt
+
+  group C:
+    positive and negative:
+      - positive prompts
+      - negative prompts
 
 ```

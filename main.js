@@ -29,12 +29,24 @@ const summary = v => {
     return el;
 };
 
-const mappingElem = ([en, jp] = v) => typeof jp === 'object'?details(en, jp) :labeledCBox(en, jp);
-const labeledCBox = (en, jp) => {
+const mappingElem = ([jp, en] = v) => en instanceof Array ? labeledCBox2(jp, en) : typeof en === 'object' ? details(jp, en) : labeledCBox(jp, en);
+const labeledCBox = (jp, en) => {
     let cx = TAG('input');
     cx.type = 'checkbox';
-    cx.dataset.en = en;
     cx.dataset.jp = jp;
+    cx.dataset.positive = en;
+    cx.dataset.negative = "";
+    let label = TAG('label');
+    label.textContent = jp;
+    label.append(cx);
+    return label;
+};
+const labeledCBox2 = (jp, en) => {
+    let cx = TAG('input');
+    cx.type = 'checkbox';
+    cx.dataset.jp = jp;
+    cx.dataset.positive = en[0].trim();
+    cx.dataset.negative = en[1] == null ? "" : en[1].trim();
     let label = TAG('label');
     label.textContent = jp;
     label.append(cx);
