@@ -26,7 +26,6 @@ onload().then(async () => {
 			default:
 		}
 	};
-	DOC.ID('check').onclick = () => checkdBox();
 	DOC.ID('clear').onclick = function() {
 		let checked = [...document.forms['accs'].querySelectorAll(':checked')];
 		checked.forEach(v => {
