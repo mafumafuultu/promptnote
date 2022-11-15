@@ -1,9 +1,9 @@
-
 :root {
 	--color-for-dark: #cccccc;
-
+	--link-base: #9CF;
+	--link-visited: #39F;
+	--link-active: #e6db74;
 }
-
 html {
 	background: #333333;
 	color: var(--color-for-dark);
@@ -19,59 +19,101 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 }
-body > button {
+body>button {
 	font-size: 1.4rem;
 }
-
+.hide {
+	display: none;
+}
+#searches {
+	display: grid;
+	grid-template-columns: 8rem 1fr 1fr 1fr auto auto;
+}
+#searches>input {
+	width: 100%;
+}
+#labels {
+	width: 8rem;
+	display: inline-block;
+}
+#labels:not(:has(~ input:hover)):before {
+	content: "Search text";
+}
+#labels:has(~ input#labeltxt:hover, ~ input#labeltxt:focus):before {
+	content: "Visible text";
+	color: pink;
+}
+#labels:has(~ input#postxt:hover, ~ input#postxt:focus):before {
+	content: "Positive text";
+	color: aqua;
+}
+#labels:has(~ input#negtxt:hover, ~ input#negtxt:focus):before {
+	content: "Negative text";
+	color: tomato;
+}
 #outer {
 	overflow-y: scroll;
-	padding-left:  0.5rem;
+	padding-left: 0.5rem;
 }
 #result {
 	display: grid;
 	grid-template-rows: auto 1fr auto 1fr;
+	grid-gap: 0.4rem;
 }
-#accs {
-}
+#accs {}
 .gd {
 	display: grid;
 	grid-template-rows: 2rem 1fr;
 }
-details details{
-	margin-left:  2rem;
+details details {
+	margin-left: 2rem;
 }
-details > label {
+details>label {
 	display: block;
 	margin-left: 2rem;
 	padding: 0.2rem;
 }
-label,summary {
+label, summary {
 	user-select: none;
 	padding: 0.2rem;
 }
-label > input {
+label>input {
 	display: none;
 }
 label:has(input:checked) {
 	color: #ffa5f4;
 	font-weight: bold;
 }
+summary:hover, label:hover {
+	color: orange;
+}
 textarea {
 	resize: none;
 	color: var(--color-for-dark);
 	background: transparent;
 }
-
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+	width: 4px;
+	height: 4px;
 }
 ::-webkit-scrollbar-track {
-  border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 ::-webkit-scrollbar-thumb {
-  background: #666;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+	background: #666;
+	border-radius: 10px;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+
+a:link {
+  color: var(--link-base, #00e);
+}
+a:visited {
+	color:var(--link-visited, #551a8b);
+	text-decoration: underline 1px var(--link-visited, #551a8b);
+}
+a:active {
+	color: var(--link-active, #e00);
 }
