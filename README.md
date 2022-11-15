@@ -2,6 +2,9 @@
 Novel AI and other prompts are left in structural notes and recalled.
 
 Record your own prompts.
+
+## Demo
+[demo page](https://github.com/mafumafuultu/promptnote)
 ## require
 
 ```sh

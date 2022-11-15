@@ -8,47 +8,43 @@
 	<script src="//cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 	<script src="./main.js"></script>
 	<script>
-function checkdBox() {
-	let checked = [...document.forms['accs'].querySelectorAll(':checked')];
-	DOC.ID('positive').value = checked.map(v => v.dataset.positive).filter(REMOVE_NOVAL).join(', ');
-	DOC.ID('negative').value = checked.map(v => v.dataset.negative).filter(REMOVE_NOVAL).join(', ');
-};
+
+const spy = fn => v => (fn(v), v);
+const log = spy(console.log);
 
 onload().then(async () => {
-	var forms = DOC.ID('accs');
+	var forms = document.forms['accs'],
+		searches = document.forms['searches'];
+
 	await loadItems().then(data => forms.append(...toAcc(data)));
-	forms.onchange = function(e) {
-		switch(e.target.tagName) {
-			case 'INPUT':
-			case 'LABEL':
-				checkdBox();
-				break;
-			default:
-		}
-	};
-	DOC.ID('clear').onclick = function() {
-		let checked = [...document.forms['accs'].querySelectorAll(':checked')];
-		checked.forEach(v => v.checked = false);
-		DOC.ID('positive').value = '';
-		DOC.ID('negative').value = '';
-	}
+
+	forms.onchange = Fn.toggleLabel;
+	DOC.ID('clear').onclick = Fn.clear;
+	searches.onchange = searches.oninput = Fn.search;
+	DOC.ID('open').onclick = Fn.open;
+	DOC.ID('close').onclick = Fn.close;
 });
 
 	</script>
 </head>
 <body>
+	<form id="searches">
+		<span id="labels"></span><input type="search" id="labeltxt" data-><input type="search" id="postxt"><input type="search" id="negtxt"><button id="open" type="button">▼</button><button id="close" type="button">▶</button>
+	</form>
 	<button id="clear">clear</button>
-	<div><a href="https://github.com/mafumafuultu/promptnote">github</a></div>
+
 	<div id="outer">
 		<form id="accs">
-			
+
 		</form>
 	</div>
 	<div id="result">
-		<span>positive</span>
+		<span>Positive: <span id="poscnt">0</span></span>
 		<textarea name="" id="positive" cols="30" rows="10"></textarea>
-		<span>negative</span>
+		<span>Negative: <span id="negcnt">0</span></span>
 		<textarea name="" id="negative" cols="30" rows="10"></textarea>
 	</div>
+	
+	<div><a href="https://github.com/mafumafuultu/promptnote">github</a></div>
 </body>
 </html>
